@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Hello
+      - uses: actions/checkout@v4
+      - name: Run Python Script
         run: |
-          echo "Hello from Github Actions"
-          date
+          python hello.py
