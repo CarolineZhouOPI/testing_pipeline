@@ -1,14 +1,26 @@
-name: Test Trigger
+name: Firmware Test
 
 on:
   workflow_dispatch:
-
+    inputs:
+      firmware_file: 
+        required: true
+      version:
+        required: true
+      major:
+        required: true
+      minor:
+        required: true
+          
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-      - name: Run Python Script
+      - name: Show Firmware Info
         run: |
-          python hello.py
+          echo "Firmware: ${{ github.event.inputs.firmware_file }}"
+          echo "Version: ${{ github.event.inputs.version }}"
+          echo "Major: ${{ github.event.inputs.major }}"
+          echo "Minor: ${{ github.event.inputs.minor }}"
