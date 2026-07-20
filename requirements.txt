@@ -1,0 +1,10 @@
+pytest
+pytest-bdd
+pytest-xdist
+allure-pytest
+paho-mqtt
+protobuf==3.20.3
+pandas
+boto3
+botocore
+requests
