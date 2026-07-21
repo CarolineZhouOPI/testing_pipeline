@@ -4,13 +4,21 @@ on:
   workflow_dispatch:
     inputs:
       firmware_file: 
+        description: firmware filename
         required: true
+        type: string
       version:
+        description: version string
         required: true
+        type: string
       major:
+        description: major version
         required: true
+        type: string
       minor:
+        description: minor version
         required: true
+        type: string
           
 jobs:
   test:
@@ -42,6 +50,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Debug layout
+        run: |
+          pwd
+          ls -la
+          ls -la tests || true
+          ls -la infra || true
+
       - name: Run smoke pytest
         run: |
           pytest test_message_monitoring_for_24hours.py -q --junitxml=results.xml
+
+      - name: Upload JUnit XML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: junit-results
+          path: results.xml
