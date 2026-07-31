@@ -50,6 +50,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Materialize MQTT cert files from secrets
+        shell: bash
+        run: |
+          set -euxo pipefail
+          mkdir -p infra/messaging/certs
+
+          cat > infra/messaging/certs/root_ca.crt << 'EOF'
+          ${{ secrets.MQTT_ROOT_CA_PEM }}
+          EOF
+
+          cat > infra/messaging/certs/client.crt << 'EOF'
+          ${{ secrets.MQTT_CLIENT_CERT_PEM }}
+          EOF
+
+          cat > infra/messaging/certs/client.key << 'EOF'
+          ${{ secrets.MQTT_CLIENT_KEY_PEM }}
+          EOF
+
+          chmod 600 infra/messaging/certs/client.key
+          ls -la infra/messaging/certs
+
       - name: Debug layout
         run: |
           pwd
