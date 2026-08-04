@@ -1,0 +1,26 @@
+.pytest_cache/
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Local environment files
+.env
+.env.*
+
+# Test artifacts and reports
+allure_report/
+allure_results/
+allure_report_zip.zip
+results.xml
+*.log
+
+# Runtime/generated cert outputs
+infra/messaging/certs/
+
+# Local sensitive cert/key files (keep in GitHub Secrets instead)
+infra/messaging/dev_qa_client.crt
+infra/messaging/dev_qa_client.key
+infra/messaging/dev_qa_root_cert_auth.crt
