@@ -1,6 +1,8 @@
 name: Firmware Test
 
 on:
+  push:
+    branches: chore/workflow-smoke-test
   workflow_dispatch:
     inputs:
       firmware_file: 
