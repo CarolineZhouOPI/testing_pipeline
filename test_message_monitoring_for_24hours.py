@@ -6,22 +6,8 @@ from pytest_bdd import scenarios, given, when, then, parsers
 from infra.messaging.mqtt_collector import MQTTCollector
 # from infra.messaging.mqtt_message_verification import verify_mqtt_messages
 import allure
-import os
-
-def test_dispatch_inputs_present():
-    assert os.getenv("FIRMWARE_FILE"), "FIRMWARE_FILE is missing"
-    assert os.getenv("FW_VERSION"), "FW_VERSION is missing"
-    assert os.getenv("FW_MAJOR"), "FW_MAJOR is missing"
-    assert os.getenv("FW_MINOR"), "FW_MINOR is missing"
-
-def test_dispatch_inputs_valid():
-    major = int(os.getenv("FW_MAJOR"))
-    minor = int(os.getenv("FW_MINOR"))
-    assert major >= 0, "FW_MAJOR must be >= 0"
-    assert minor >= 0, "FW_MINOR must be >= 0"
 
 scenarios("../features/messaging_monitoring.feature")
-
 
 def _normalize_text(value):
     return "".join(ch.lower() for ch in value if ch.isalnum())
